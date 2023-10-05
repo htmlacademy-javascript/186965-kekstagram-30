@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
-* Студент: [Виктория Кашина](https://up.htmlacademy.ru/javascript/30/user/186965).
-* Наставник: `Неизвестно`.
+- Студент: [Виктория Кашина](https://up.htmlacademy.ru/javascript/30/user/186965).
+- Наставник: [Ольга Ветер](https://htmlacademy.ru/profile/id73199).
 
 ---
 
