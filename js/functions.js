@@ -1,6 +1,6 @@
 const checkStringLength = (string, maxLength) => string.length <= maxLength;
 
-// console.log(checkStringLength('проверяемая строка', 10));
+checkStringLength('проверяемая строка', 10);
 
 const isPallindrom = (string) => {
   const normalisedString = string.replaceAll(' ', '').toLowerCase();
@@ -13,7 +13,7 @@ const isPallindrom = (string) => {
   return reversedString === normalisedString ? 'Паллиндром' : 'Не палиндром';
 };
 
-// console.log(isPallindrom('Лёша на полке клопа нашёл '));
+isPallindrom('Лёша на полке клопа нашёл ');
 
 const positiveNumber = (string) => {
   let resultNumber = '';
@@ -28,4 +28,4 @@ const positiveNumber = (string) => {
   return parseInt(resultNumber, 10);
 };
 
-console.log(positiveNumber(-2023));
+positiveNumber(-2023);
