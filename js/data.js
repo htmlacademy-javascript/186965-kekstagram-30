@@ -1,8 +1,4 @@
-import {
-  createRandomId,
-  getRandomArrayElement,
-  getRandomInteger,
-} from './utils.js';
+import { createId, getRandomArrayElement, getRandomInteger } from './utils.js';
 
 const PHOTO_URL = 'photos/';
 const AVATAR_URL = 'img/avatar';
@@ -29,9 +25,9 @@ const photoCommentTexts = [
 ];
 const commentNames = ['Chandler', 'Monica', 'Rachel', 'Ross', 'Joey', 'Phoebe'];
 
-const generatePhotoId = createRandomId(MIN_AMOUNT, MAX_PHOTOS_AMOUNT);
-const generateRandomPhotoUrl = createRandomId(MIN_AMOUNT, MAX_PHOTOS_AMOUNT);
-const generatePhotoCommentId = createRandomId(MIN_AMOUNT, 1000);
+const generatePhotoId = createId();
+const generateRandomPhotoUrl = createId();
+const generatePhotoCommentId = createId();
 
 const createCommentMessage = () =>
   Array.from({ length: getRandomInteger(1, 2) }, () =>

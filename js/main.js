@@ -1,4 +1,3 @@
-import { photos } from './data.js';
+import { createRandomUsersPictures } from './photos-miniature.js';
 
-photos();
-// console.log(photos());
+createRandomUsersPictures();
