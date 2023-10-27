@@ -8,20 +8,12 @@ const getRandomInteger = (min, max) => {
 };
 
 // функция генератор для получения случайных id из указанного диапазона, без повторения
-const createRandomId = (min, max) => {
-  const previousValues = [];
+const createId = () => {
+  let lastGeneratedId = 0;
 
-  return function () {
-    let currentValue = getRandomInteger(min, max);
-    if (previousValues.length >= max - min + 1) {
-      return null;
-    }
-
-    while (previousValues.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-    previousValues.push(currentValue);
-    return currentValue;
+  return () => {
+    lastGeneratedId += 1;
+    return lastGeneratedId;
   };
 };
 
@@ -29,4 +21,4 @@ const createRandomId = (min, max) => {
 const getRandomArrayElement = (array) =>
   array[getRandomInteger(0, array.length - 1)];
 
-export { createRandomId, getRandomArrayElement, getRandomInteger };
+export { createId, getRandomArrayElement, getRandomInteger };
