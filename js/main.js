@@ -1,3 +1,5 @@
-import { createRandomUsersPictures } from './photos-miniature.js';
+import { createUsersPictures } from './render-photos.js';
 
-createRandomUsersPictures();
+
+createUsersPictures();
+

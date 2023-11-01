@@ -36,7 +36,7 @@ const createCommentMessage = () =>
 
 const createPhotoComment = () => ({
   id: generatePhotoCommentId(),
-  avatar: `${AVATAR_URL}${getRandomInteger(MIN_AMOUNT, 6)}.svg`,
+  avatar: `${AVATAR_URL}-${getRandomInteger(MIN_AMOUNT, 6)}.svg`,
   message: createCommentMessage(),
   name: getRandomArrayElement(commentNames),
 });
