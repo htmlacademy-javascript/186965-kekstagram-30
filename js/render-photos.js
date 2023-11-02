@@ -29,7 +29,6 @@ const createUsersPictures = () => {
 
     photosBlockElement.addEventListener('click', onPhotoClick(usersPhotos));
   }
-
 };
 
 export { createUsersPictures };

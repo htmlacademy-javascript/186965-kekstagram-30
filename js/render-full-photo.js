@@ -49,6 +49,9 @@ const renderComment = (comments) => {
     });
 
     commentListElement.append(commentsFragment);
+  } else {
+    bigPhotoCommentCountElement.textContent = 'К данной фотографии нет комментариев';
+    bigPhotoCommentLoaderElement.classList.add('hidden');
   }
 };
 
@@ -67,6 +70,7 @@ const renderFullPhoto = ({ url, likes, comments, description }) => {
 function onCloseFullPhoto () {
   bigPhotoOverlayElement.classList.add('hidden');
 
+
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
@@ -81,8 +85,7 @@ const onPhotoClick = (photoArray) => (evt) => {
     const targetPhotoId = currentEventTarget.dataset.photoId;
     const targetPhotoObject = findPhotoElementInArrayById(targetPhotoId, photoArray);
     bigPhotoOverlayElement.classList.remove('hidden');
-    bigPhotoCommentCountElement.classList.add('hidden');
-    bigPhotoCommentLoaderElement .classList.add('hidden');
+
 
     renderFullPhoto(targetPhotoObject);
 
