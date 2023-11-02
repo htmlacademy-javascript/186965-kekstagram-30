@@ -54,7 +54,6 @@ const renderComments = (comments) => {
 };
 
 
-
 const renderFullPhoto = ({ url, likes, comments, description }) => {
   bigPhotoImageElement.src = url;
   bigPhotoLikesCountElement.textContent = likes;
