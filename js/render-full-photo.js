@@ -54,6 +54,7 @@ const renderComments = (comments) => {
 };
 
 
+
 const renderFullPhoto = ({ url, likes, comments, description }) => {
   bigPhotoImageElement.src = url;
   bigPhotoLikesCountElement.textContent = likes;
@@ -76,7 +77,7 @@ const renderFullPhoto = ({ url, likes, comments, description }) => {
     }
 
     bigPhotoCommentListElement.innerHTML = '';
-    bigPhotoCommentListElement.append(renderComments(comments.slice(0, showedCommentsAmount)));
+    renderComments(comments.slice(0, showedCommentsAmount));
     bigPhotoCommentCountElement.innerHTML = `<span class='social__comment-shown-count'>${showedCommentsAmount}</span> из <span class="social__comment-total-count">${commentsCount}</span> комментариев`;
 
   };
@@ -107,7 +108,6 @@ const onPhotoClick = (photoArray) => (evt) => {
     const targetPhotoId = currentEventTarget.dataset.photoId;
     const targetPhotoObject = findPhotoElementInArrayById(targetPhotoId, photoArray);
     bigPhotoOverlayElement.classList.remove('hidden');
-
 
     renderFullPhoto(targetPhotoObject);
 
