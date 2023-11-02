@@ -9,6 +9,7 @@ const photoTemplate = document
   .querySelector('#picture')
   .content.querySelector('.picture');
 const usersPhotos = photos();
+
 const usersPhotoListFragment = document.createDocumentFragment();
 
 const createUsersPictures = () => {
