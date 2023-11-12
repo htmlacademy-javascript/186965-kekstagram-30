@@ -1,5 +1,5 @@
-import { createUsersPictures } from './render-photos.js';
+import { photos } from './data.js';
+import { renderGallery } from './gallery.js';
 
-
-createUsersPictures();
+renderGallery(photos());
 
