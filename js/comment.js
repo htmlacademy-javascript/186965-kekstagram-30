@@ -1,6 +1,3 @@
-
-
-
 const commentTemplateElement = document.querySelector('#comment').content.querySelector('.social__comment');
 
 const fullPhotoOverlayElement = document.querySelector('.big-picture');
