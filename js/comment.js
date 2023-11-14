@@ -1,7 +1,3 @@
-
-const START_COMMENT_COUNT = 5;
-let showedCommentsAmount = 0;
-
 const commentTemplateElement = document.querySelector('#comment').content.querySelector('.social__comment');
 
 const fullPhotoOverlayElement = document.querySelector('.big-picture');
@@ -43,25 +39,5 @@ const renderComments = (comments) => {
   commentsListElement.append(commentsFragment);
 };
 
-const updateCommentsList = (comments) => {
 
-  const commentsCount = comments.length;
-  showedCommentsAmount += START_COMMENT_COUNT;
-
-  if (showedCommentsAmount >= commentsCount) {
-    showedCommentsAmount = commentsCount;
-    fullPhotoCommentLoaderElement.classList.add('hidden');
-    fullPhotoCommentLoaderElement.removeEventListener('click', updateCommentsList);
-  } else {
-    fullPhotoCommentLoaderElement.classList.remove('hidden');
-    fullPhotoCommentLoaderElement.addEventListener('click', updateCommentsList);
-  }
-
-  renderComments(comments.slice(0, showedCommentsAmount));
-
-  fullPhotoCommentCountElement.innerHTML = `<span class='social__comment-shown-count'>${showedCommentsAmount}</span> из <span class="social__comment-total-count">${commentsCount}</span> комментариев`;
-
-};
-
-
-export { emptyCommentList, updateCommentsList };
+export { renderComments, emptyCommentList };

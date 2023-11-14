@@ -10,11 +10,17 @@ const bodyElement = document.querySelector('body');
 const photoPreviewElement = photoUploadOverlayElement.querySelector('.img-upload__preview img');
 const closePhotoUploadButtonElement = photoFormUploadElement.querySelector('.img-upload__cancel');
 
+const photoUploadFormElement = document.querySelector('#upload-select-image');
+const photoHashtagInputElement = photoUploadFormElement.querySelector('.text__hashtags');
+const photoTextInputElement = photoUploadFormElement.querySelector('.text__description');
+
+const isInputFieldOnFocus = () => document.activeElement === photoHashtagInputElement || document.activeElement === photoTextInputElement;
 
 const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
+  if (isEscapeKey(evt) && !isInputFieldOnFocus()) {
     evt.preventDefault();
     hidePhotoUpload();
+
   }
 };
 
@@ -22,6 +28,8 @@ function hidePhotoUpload() {
   photoUploadOverlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   photoUploadInputElement.value = '';
+
+
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
