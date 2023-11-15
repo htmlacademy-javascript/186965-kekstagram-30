@@ -67,3 +67,4 @@ closePhotoUploadButtonElement.addEventListener('click', () => {
 });
 
 
+export { photoPreviewElement };
