@@ -1,12 +1,7 @@
-// комментарий не обязателен;
-// длина комментария не может составлять больше 140 символов;
-// если фокус находится в поле ввода комментария, нажатие на Esc не должно приводить к закрытию формы редактирования изображения.
-
-
 const HASHTAG_RULES = /^#[a-zа-яё0-9]{1,19}$/i;
 const photoUploadFormElement = document.querySelector('#upload-select-image');
 const photoHashtagInputElement = photoUploadFormElement.querySelector('.text__hashtags');
-const photoTextInputElement = photoUploadFormElement.querySelector('.text__description');
+
 
 const pristine = new Pristine(photoUploadFormElement, {
   classTo: 'img-upload__field-wrapper',
@@ -42,12 +37,8 @@ const validateHashtagsDuplicates = (value) => {
 };
 
 pristine.addValidator(photoHashtagInputElement, validateHashtag, 'Неккоректный хэштег');
-pristine.addValidator(photoHashtagInputElement, validateHashtagLength, 'Много хэштегов');
-pristine.addValidator(photoHashtagInputElement, validateHashtagsDuplicates, 'Повтояющийся хэштег');
+pristine.addValidator(photoHashtagInputElement, validateHashtagLength, 'Максимальное количество хэштегов: 5');
+pristine.addValidator(photoHashtagInputElement, validateHashtagsDuplicates, 'Присутствует повтояющийся хэштег');
 
 
-
-photoUploadFormElement.addEventListener('submit', () => {
-  // evt.preventDefault();
-  pristine.validate();
-});
+export { photoUploadFormElement, pristine };

@@ -1439,8 +1439,9 @@ main {
 }
 
 
-.hashtag-error {
-  margin-top: 0;
+.invalid-error {
+  margin: 0;
+  margin-bottom: 5px;
   color: red;
   font-weight: 700;
   font-size: 18px;
