@@ -13,8 +13,7 @@ const pristine = new Pristine(photoUploadFormElement, {
 }, false);
 
 
-// Валидация Hashtag
-const normalizeHashtag = (hashtag) => hashtag.trim().split(' ');
+const normalizeHashtag = (hashtag) => hashtag.trim().toLowerCase().split(' ');
 
 const findHashtagDuplicates = (hashtags) => new Set(hashtags).size !== hashtags.length;
 

@@ -1,5 +1,6 @@
 import { photoPreviewElement } from './photo-upload.js';
 
+
 const SCALE_STEP = 25;
 
 const photoScaleElement = document.querySelector('.scale');
@@ -50,6 +51,4 @@ scaleControlBiggerElement.addEventListener('click', () => {
   } else {
     photoPreviewElement.style.scale = parseFloat(`0.${changeValueInput.value()}`);
   }
-
 });
-

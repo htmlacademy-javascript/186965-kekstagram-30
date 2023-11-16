@@ -1,5 +1,6 @@
 
-import { isEscapeKey } from './utils';
+import { init as initEffect, reset as resetEffect } from './photo-effect.js';
+import { isEscapeKey } from './utils.js';
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
@@ -60,10 +61,12 @@ const changePhotoPreview = () => {
 photoUploadInputElement.addEventListener('change', () => {
   showUploadForm();
   changePhotoPreview();
+  initEffect();
 });
 
 closePhotoUploadButtonElement.addEventListener('click', () => {
   onClosePhotoUpload();
+  resetEffect();
 });
 
 
