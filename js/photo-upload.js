@@ -1,6 +1,8 @@
 
 import { init as initEffect, reset as resetEffect } from './photo-effect.js';
+import { resetScale } from './photo-scale.js';
 import { isEscapeKey } from './utils.js';
+import { pristine } from './upload-form-validation.js';
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
@@ -35,7 +37,11 @@ function hidePhotoUpload() {
 }
 
 const onClosePhotoUpload = () => {
+  photoFormUploadElement.reset();
+  pristine.reset();
   hidePhotoUpload();
+  resetEffect();
+  resetScale();
 };
 
 const showUploadForm = () => {
@@ -66,7 +72,6 @@ photoUploadInputElement.addEventListener('change', () => {
 
 closePhotoUploadButtonElement.addEventListener('click', () => {
   onClosePhotoUpload();
-  resetEffect();
 });
 
 
