@@ -26,10 +26,12 @@ const onBiggerScaleButtonClick = () => {
   scaleImage(Math.min(parseInt(scaleValueElement.value, 10) + SCALE_STEP, MAX_SCALE));
 };
 
+const initScale = () => {
+  scaleControlSmallerElement.addEventListener('click', onSmallerScalerButtonClick);
+  scaleControlBiggerElement.addEventListener('click', onBiggerScaleButtonClick);
+};
+
 const resetScale = () => scaleImage(DEFAULT_SCALE);
 
-scaleControlSmallerElement.addEventListener('click', onSmallerScalerButtonClick);
-scaleControlBiggerElement.addEventListener('click', onBiggerScaleButtonClick);
 
-
-export {resetScale};
+export {resetScale, initScale};

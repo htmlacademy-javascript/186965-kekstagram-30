@@ -1,6 +1,6 @@
 
 import { init as initEffect, reset as resetEffect } from './photo-effect.js';
-import { resetScale } from './photo-scale.js';
+import { resetScale, initScale } from './photo-scale.js';
 import { isEscapeKey } from './utils.js';
 import { pristine } from './upload-form-validation.js';
 
@@ -68,6 +68,7 @@ photoUploadInputElement.addEventListener('change', () => {
   showUploadForm();
   changePhotoPreview();
   initEffect();
+  initScale();
 });
 
 closePhotoUploadButtonElement.addEventListener('click', () => {
