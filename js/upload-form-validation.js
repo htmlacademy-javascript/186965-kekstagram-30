@@ -5,7 +5,7 @@ const photoHashtagInputElement = photoUploadFormElement.querySelector('.text__ha
 
 const pristine = new Pristine(photoUploadFormElement, {
   classTo: 'img-upload__field-wrapper',
-  errorClass: 'img-upload__field-wrapper--invalid',
+  errorClass: 'img-upload__field-wrapper--error',
   successClass: 'img-upload__field-wrapper--valid',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextTag: 'p',
@@ -35,9 +35,9 @@ const validateHashtagsDuplicates = (value) => {
   return !findHashtagDuplicates(hashtagInputValueArray);
 };
 
-pristine.addValidator(photoHashtagInputElement, validateHashtag, 'Неккоректный хэштег');
-pristine.addValidator(photoHashtagInputElement, validateHashtagLength, 'Максимальное количество хэштегов: 5');
-pristine.addValidator(photoHashtagInputElement, validateHashtagsDuplicates, 'Присутствует повтояющийся хэштег');
+pristine.addValidator(photoHashtagInputElement, validateHashtag, 'Введён невалидный хэш-тег');
+pristine.addValidator(photoHashtagInputElement, validateHashtagLength, 'Превышено количество хэш-тегов');
+pristine.addValidator(photoHashtagInputElement, validateHashtagsDuplicates, 'Хэш-теги повторяются');
 
 
 export { photoUploadFormElement, pristine };

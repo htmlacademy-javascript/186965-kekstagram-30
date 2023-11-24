@@ -1,3 +1,5 @@
+
+
 const SERVER_URL = 'https://30.javascript.pages.academy/kekstagram';
 
 const ServerRoute = {
@@ -10,29 +12,37 @@ const HttpMethod = {
   POST: 'POST'
 };
 
-const ErrorText = {
-  [HttpMethod.GET]: 'Не удалось загрузить данные. Поробуйте ещё раз',
-  [HttpMethod.POST]: 'Не удалось отправить данные',
-};
+
+const loadPhotos = (onSuccess, onFail) => fetch(`${SERVER_URL}${ServerRoute.GET_DATA}`)
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Данные не загрузились');
+    }
+
+    return response.json();
+  })
+  .then((photos) => {
+    onSuccess(photos);
+  })
+  .catch(() => {
+    onFail();
+  });
 
 
-const request = async (url, method = HttpMethod.GET, body = null) => {
-  const response = await fetch(url, { method, body });
-  if (!response.ok) {
-    throw new Error(ErrorText.method);
+const sendPhotos = (onSuccess, onFail, body) => fetch(`${SERVER_URL}${ServerRoute.SEND_DATA}`,
+  {
+    method: HttpMethod.POST,
+    body,
   }
-
-  return response.json();
-};
-
-
-const loadPhotos = async () => request(`${SERVER_URL}${ServerRoute.GET_DATA}`);
-
-const sendPhotos = async (photoData) => request(
-  `${SERVER_URL}${ServerRoute.SEND_DATA}`,
-  HttpMethod.POST,
-  photoData,
-);
+)
+  .then((response) => {
+    if (response.ok) {
+      onSuccess();
+    } else {
+      onFail();
+    }
+  })
+  .catch(() => onFail());
 
 
 export { loadPhotos, sendPhotos };

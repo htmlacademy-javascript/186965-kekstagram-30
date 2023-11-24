@@ -1,16 +1,65 @@
-const ERROR_SHOW_TIME = 5000;
+import { isEscapeKey } from './utils.js';
 
-const errorMessageTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
-const successMessageTemplate = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
+const ALERT_SHOW_TIME = 5000;
 
-const showErrorMessage = () => {
-  const errorMessage = errorMessageTemplate.cloneNode(true);
-  document.body.append(errorMessage);
+const errorDataLoadMessageTemplate = document.querySelector('#data-error').content.querySelector('.data-error');
 
-  setTimeout(() => {
-    errorMessage.remove();
-  }, ERROR_SHOW_TIME);
+const successSendDataMessageTemplate = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
+const errorSendLoadMessageTemplate = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
+
+
+const hideServiceMessage = () => {
+  const currentMessage = document.querySelector('.success') || document.querySelector('.error');
+
+  currentMessage.remove();
+  document.removeEventListener('keydown', onEscKey);
+  document.body.removeEventListener('click', onBodyClick);
 };
 
 
-export { showErrorMessage };
+function onEscKey(evt) {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    hideServiceMessage();
+  }
+}
+
+
+function onBodyClick(evt) {
+  if (evt.target.closest('.success__inner') || (evt.target.closest('.error__inner'))) {
+    return;
+  }
+  hideServiceMessage();
+}
+
+const onCloseButtonClick = () => {
+  hideServiceMessage();
+};
+
+
+const addMessage = (message, buttonClass) => {
+  document.body.append(message);
+  document.addEventListener('keydown', onEscKey);
+  document.body.addEventListener('click', onBodyClick);
+  message.querySelector(buttonClass).addEventListener('click', onCloseButtonClick);
+};
+
+
+const showSuccessMessage = () => {
+  addMessage(successSendDataMessageTemplate, '.success__button');
+};
+
+const showErrorMessage = () => {
+  addMessage(errorSendLoadMessageTemplate, '.error__button');
+};
+
+
+const showErrorAlert = () => {
+  document.body.append(errorDataLoadMessageTemplate);
+
+  setTimeout(() => {
+    errorDataLoadMessageTemplate.remove();
+  }, ALERT_SHOW_TIME);
+};
+
+export { showErrorMessage, showSuccessMessage, showErrorAlert };
