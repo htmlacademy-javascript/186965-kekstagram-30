@@ -1442,8 +1442,7 @@ main {
 
 .invalid-error {
   margin: 0;
-  margin-bottom: 5px;
-  color: red;
+  padding-bottom: 5px;
   font-weight: 700;
   font-size: 18px;
 }

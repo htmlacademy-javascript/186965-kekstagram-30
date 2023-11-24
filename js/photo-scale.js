@@ -2,6 +2,10 @@ import { photoPreviewElement } from './photo-upload.js';
 
 
 const SCALE_STEP = 25;
+const MIN_SCALE = 25;
+const MAX_SCALE = 100;
+const DEFAULT_SCALE = 100;
+
 
 const photoScaleElement = document.querySelector('.scale');
 const scaleControlSmallerElement = photoScaleElement.querySelector('.scale__control--smaller');
@@ -9,46 +13,25 @@ const scaleControlBiggerElement = photoScaleElement.querySelector('.scale__contr
 const scaleValueElement = photoScaleElement.querySelector('.scale__control--value');
 
 
-const changeScaleValue = () => {
-  let inputValue = parseInt(scaleValueElement.value, 10);
-
-  const changeValue = (step) => {
-    inputValue += step;
-  };
-
-  return {
-    decrease: () => {
-      if (inputValue > SCALE_STEP) {
-        changeValue(-SCALE_STEP);
-      }
-    },
-    increase: () => {
-      if (inputValue < 100) {
-        changeValue(SCALE_STEP);
-      }
-    },
-    value: () => inputValue
-  };
+const scaleImage = (value) => {
+  photoPreviewElement.style.transform = `scale(${value / 100})`;
+  scaleValueElement.value = `${value}%`;
 };
 
+const onSmallerScalerButtonClick = () => {
+  scaleImage(Math.max(parseInt(scaleValueElement.value, 10) - SCALE_STEP, MIN_SCALE));
+};
 
-const changeValueInput = changeScaleValue();
+const onBiggerScaleButtonClick = () => {
+  scaleImage(Math.min(parseInt(scaleValueElement.value, 10) + SCALE_STEP, MAX_SCALE));
+};
 
-scaleControlSmallerElement.addEventListener('click', () => {
+const initScale = () => {
+  scaleControlSmallerElement.addEventListener('click', onSmallerScalerButtonClick);
+  scaleControlBiggerElement.addEventListener('click', onBiggerScaleButtonClick);
+};
 
-  changeValueInput.decrease();
-  scaleValueElement.value = `${changeValueInput.value()}%`;
-  photoPreviewElement.style.scale = parseFloat(`0.${changeValueInput.value()}`);
+const resetScale = () => scaleImage(DEFAULT_SCALE);
 
-});
 
-scaleControlBiggerElement.addEventListener('click', () => {
-  changeValueInput.increase();
-  scaleValueElement.value = `${changeValueInput.value()}%`;
-
-  if (scaleValueElement.value === '100%') {
-    photoPreviewElement.style.scale = '1';
-  } else {
-    photoPreviewElement.style.scale = parseFloat(`0.${changeValueInput.value()}`);
-  }
-});
+export {resetScale, initScale};
