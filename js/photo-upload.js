@@ -35,6 +35,10 @@ const onDocumentKeydown = (evt) => {
 };
 
 function hidePhotoUpload() {
+  photoFormUploadElement.reset();
+  pristine.reset();
+  resetEffect();
+  resetScale();
   photoUploadOverlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   photoUploadInputElement.value = '';
@@ -43,12 +47,7 @@ function hidePhotoUpload() {
 }
 
 const onClosePhotoUpload = () => {
-  photoFormUploadElement.reset();
-  pristine.reset();
   hidePhotoUpload();
-  resetEffect();
-  resetScale();
-
 };
 
 const changePhotoPreview = () => {
@@ -78,14 +77,12 @@ const showUploadForm = () => {
 
 photoUploadInputElement.addEventListener('change', () => {
   showUploadForm();
-  initEffect();
-  initScale();
-
 });
 
 closePhotoUploadButtonElement.addEventListener('click', () => {
   onClosePhotoUpload();
 });
-
+initEffect();
+initScale();
 
 export { photoPreviewElement, photoUploadInputElement, photoUploadOverlayElement, hidePhotoUpload };

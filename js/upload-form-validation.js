@@ -1,4 +1,5 @@
 const HASHTAG_RULES = /^#[a-zа-яё0-9]{1,19}$/i;
+const MAX_HASHTAG_COUNT = 5;
 const photoUploadFormElement = document.querySelector('#upload-select-image');
 const photoHashtagInputElement = photoUploadFormElement.querySelector('.text__hashtags');
 
@@ -6,14 +7,15 @@ const photoHashtagInputElement = photoUploadFormElement.querySelector('.text__ha
 const pristine = new Pristine(photoUploadFormElement, {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload__field-wrapper--error',
-  successClass: 'img-upload__field-wrapper--valid',
   errorTextParent: 'img-upload__field-wrapper',
-  errorTextTag: 'p',
-  errorTextClass: 'invalid-error'
-}, false);
+});
 
 
-const normalizeHashtag = (hashtag) => hashtag.trim().toLowerCase().split(' ');
+const normalizeHashtag = (str) => {
+  const hashtags = str.trim().toLowerCase().split(' ').filter((hashtag) => hashtag.length > 0);
+
+  return hashtags;
+};
 
 const findHashtagDuplicates = (hashtags) => new Set(hashtags).size !== hashtags.length;
 
@@ -26,7 +28,7 @@ const validateHashtag = (value) => {
 const validateHashtagLength = (value) => {
   const hashtagInputValueArray = normalizeHashtag(value);
 
-  return hashtagInputValueArray.length <= 5;
+  return hashtagInputValueArray.length <= MAX_HASHTAG_COUNT;
 };
 
 const validateHashtagsDuplicates = (value) => {
@@ -35,9 +37,29 @@ const validateHashtagsDuplicates = (value) => {
   return !findHashtagDuplicates(hashtagInputValueArray);
 };
 
-pristine.addValidator(photoHashtagInputElement, validateHashtag, 'Введён невалидный хэш-тег');
-pristine.addValidator(photoHashtagInputElement, validateHashtagLength, 'Превышено количество хэш-тегов');
-pristine.addValidator(photoHashtagInputElement, validateHashtagsDuplicates, 'Хэш-теги повторяются');
+pristine.addValidator(
+  photoHashtagInputElement,
+  validateHashtag,
+  'Введён невалидный хэш-тег',
+  1,
+  true
+);
+
+pristine.addValidator(
+  photoHashtagInputElement,
+  validateHashtagLength,
+  'Превышено количество хэш-тегов',
+  2,
+  true
+);
+
+pristine.addValidator(
+  photoHashtagInputElement,
+  validateHashtagsDuplicates,
+  'Хэш-теги повторяются',
+  3,
+  true
+);
 
 
 export { photoUploadFormElement, pristine };
