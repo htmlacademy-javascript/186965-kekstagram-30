@@ -12,9 +12,9 @@ const FilterEnum = {
 
 const filterElement = document.querySelector('.img-filters');
 const filterFormElement = document.querySelector('.img-filters__form');
-const filterDefaultBtn = filterFormElement.querySelector('#filter-default');
-const filterRandomBtn = filterFormElement.querySelector('#filter-random');
-const filterDiscussedBtn = filterFormElement.querySelector('#filter-discussed');
+const filterDefaultBtnElement = filterFormElement.querySelector('#filter-default');
+const filterRandomBtnElement = filterFormElement.querySelector('#filter-random');
+const filterDiscussedBtnElement = filterFormElement.querySelector('#filter-discussed');
 let currentFilter = FilterEnum.DEFAULT;
 
 const filterHandlers = {
@@ -64,15 +64,15 @@ const handleFilterClick = (evt, filter, data) => {
 
 const initFilter = (data) => {
   filterElement.classList.remove('img-filters--inactive');
-  filterDefaultBtn.addEventListener('click', (evt) => {
+  filterDefaultBtnElement.addEventListener('click', (evt) => {
     handleFilterClick(evt, FilterEnum.DEFAULT, data);
   });
 
-  filterRandomBtn.addEventListener('click', (evt) => {
+  filterRandomBtnElement.addEventListener('click', (evt) => {
     handleFilterClick(evt, FilterEnum.RANDOM, data);
   });
 
-  filterDiscussedBtn.addEventListener('click', (evt) => {
+  filterDiscussedBtnElement.addEventListener('click', (evt) => {
     handleFilterClick(evt, FilterEnum.DISCUSSED, data);
   });
 };
