@@ -3,6 +3,7 @@ import { sendPhotos } from './api.js';
 import { resetScale } from './photo-scale.js';
 import { reset as resetEffect } from './photo-effect.js';
 import { photoUploadInputElement, hidePhotoUpload } from './photo-upload.js';
+import { showErrorMessage, showSuccessMessage } from './service-messages.js';
 
 const formSubmitButtonElement = photoUploadFormElement.querySelector('.img-upload__submit');
 
@@ -25,29 +26,41 @@ const resetForm = () => {
   hidePhotoUpload();
 };
 
-const sendFormData = (onSuccess, onFail) => {
-  photoUploadFormElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
 
-    const isValid = pristine.validate();
+const sendFormData = (onSuccess, onFail, evt) => {
+  evt.preventDefault();
 
-    if (isValid) {
-      blockSubmitButton();
-      sendPhotos(
-        () => {
-          unblockSubmitButton();
-          onSuccess();
-          resetForm();
+  const isValid = pristine.validate();
 
-        },
-        () => {
-          unblockSubmitButton();
-          onFail();
-        },
-        new FormData(evt.target)
-      );
-    }
-  });
+  if (isValid) {
+    blockSubmitButton();
+    sendPhotos(
+      () => {
+        unblockSubmitButton();
+        onSuccess();
+        resetForm();
+
+      },
+      () => {
+        unblockSubmitButton();
+        onFail();
+      },
+      new FormData(evt.target)
+    );
+  }
 };
 
-export { sendFormData };
+const onFormSubmit = (evt) => {
+  sendFormData(
+    () => {
+      showSuccessMessage();
+      photoUploadFormElement.removeEventListener('submit', onFormSubmit);
+    },
+    () => showErrorMessage(),
+    evt
+  );
+
+
+};
+
+export { sendFormData, onFormSubmit };

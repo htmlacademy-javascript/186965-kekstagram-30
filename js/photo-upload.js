@@ -4,6 +4,8 @@ import { resetScale, initScale } from './photo-scale.js';
 import { isEscapeKey } from './utils.js';
 import { pristine } from './upload-form-validation.js';
 
+import { onFormSubmit } from './form-submit.js';
+
 const FILE_TYPES = ['jpg', 'jpeg', 'png', 'webp'];
 
 const photoFormUploadElement = document.querySelector('#upload-select-image');
@@ -37,7 +39,6 @@ function hidePhotoUpload() {
   bodyElement.classList.remove('modal-open');
   photoUploadInputElement.value = '';
 
-
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
@@ -47,6 +48,7 @@ const onClosePhotoUpload = () => {
   hidePhotoUpload();
   resetEffect();
   resetScale();
+
 };
 
 const changePhotoPreview = () => {
@@ -70,12 +72,15 @@ const showUploadForm = () => {
   bodyElement.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 
+  photoUploadFormElement.addEventListener('submit', onFormSubmit);
 };
+
 
 photoUploadInputElement.addEventListener('change', () => {
   showUploadForm();
   initEffect();
   initScale();
+
 });
 
 closePhotoUploadButtonElement.addEventListener('click', () => {

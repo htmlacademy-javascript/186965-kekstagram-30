@@ -1,14 +1,19 @@
 import { renderGallery } from './gallery.js';
 import './photo-upload.js';
 import './upload-form-validation.js';
-import { showErrorAlert, showErrorMessage, showSuccessMessage } from './service-messages.js';
+import { showErrorAlert} from './service-messages.js';
 
 import { loadPhotos } from './api.js';
-import { sendFormData } from './form-submit.js';
 
-loadPhotos(renderGallery, showErrorAlert);
+import { initFilter } from './photo-filter.js';
 
-sendFormData(
-  () => showSuccessMessage(),
-  () => showErrorMessage()
+
+loadPhotos(
+  (photos) => {
+    renderGallery(photos);
+    initFilter(photos);
+  },
+  () => showErrorAlert()
 );
+
+
