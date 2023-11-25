@@ -1,5 +1,3 @@
-
-
 const SERVER_URL = 'https://30.javascript.pages.academy/kekstagram';
 
 const ServerRoute = {
