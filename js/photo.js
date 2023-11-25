@@ -26,7 +26,7 @@ const onDocumentKeydown = (evt) => {
 
 function hideFullPhoto () {
   fullPhotoOverlayElement.classList.add('hidden');
-  bodyElement.classList.remove('model');
+  bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 

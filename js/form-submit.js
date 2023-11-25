@@ -37,9 +37,8 @@ const sendFormData = (onSuccess, onFail, evt) => {
     sendPhotos(
       () => {
         unblockSubmitButton();
-        onSuccess();
         resetForm();
-
+        onSuccess();
       },
       () => {
         unblockSubmitButton();
